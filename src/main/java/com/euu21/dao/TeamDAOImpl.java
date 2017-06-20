@@ -39,6 +39,11 @@ public class TeamDAOImpl implements TeamDAO {
         return team;
     }
 
+    public Team getTeam(String name) {
+        Team team = (Team) getCurrentSession().get(Team.class, name);
+        return team;
+    }
+
     public void deleteTeam(int id) {
         Team team = getTeam(id);
         if (team != null)

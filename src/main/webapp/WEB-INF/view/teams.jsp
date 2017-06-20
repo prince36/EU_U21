@@ -35,45 +35,41 @@
 <jsp:include page="module/carousel1.jsp" />
 
 <div class="row">
-    <div class=".col-md-6">
+    <div class="container">
+    <div class=".col-md-12 jumbotron">
         <div class="container marketing">
             <div class="row" style="margin-bottom: 35px">
                 <c:forEach items="${teams}" var="teams">
-                    <div class="col-lg-6" style="text-align: center!important;">
+                    <div class="col-lg-3" style="text-align: center!important;">
                         <div class="" style="margin-bottom: 35px">
                             <img class="rounded-circle" src="<c:url value="/resources/sz1/${teams.idteams}.png"></c:url>" alt="<c:url value="${boot.idboots}"></c:url>" style = "width: 120px; vertical-align:middle" class="img-thumbnail"/>
                             <h3>${teams.name} </h3>
                             <p>${teams.group}</p>
                             <a href="<spring:url value="/teams/team/${teams.name}" />" >LINK</a>
-
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
     </div>
-
-    <div class=".col-md-6" style="text-align: center!important; margin-left: 40px">
-        <table class="table table-striped">
-            <thead> <tr> <th>#</th> <th>Drużyna</th> <th>MR</th> <th>G+</th> <th>G-</th> <th>PKT</th> </tr> </thead>
-            <% int licznik=0; %>
-            <tbody>
-<c:forEach items="${tables}" var="teams">
-    <% licznik = licznik +1; %>
-                <tr>
-                    <th scope="row"><%=licznik%></th>
-                    <td>${teams.team_name}</td>
-                    <td>${teams.mr}</td>
-                    <td>${teams.g_plus}</td>
-                    <th>${teams.g_minus}</th>
-                    <th>${teams.pkt}</th>
-                </tr>
-</c:forEach>
-            </tbody>
-
-        </table>
     </div>
+
+
 </div>
+
+
+
+
+
+<!-- START THE Terminarz -->
+<div class="container marketing">
+<h3>Terminarz</h3>
+</div>
+
+        <div class="container marketing">
+<h3>Artykuły</h3>
+<!-- START THE FEATURETTES -->
+        </div>
 
 
 

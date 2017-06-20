@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +17,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class MatchServiceImpl {
+public class MatchServiceImpl implements MatchService {
 
     @Autowired
     private MatchDAO matchDAO;
+    @Autowired
+    private TeamDAO teamDAO;
 
     public void addMatch(Match match){
 
@@ -43,15 +46,23 @@ public class MatchServiceImpl {
 
 
     //todo
-    public List<Match> getMatchsforTeam(Team team){
-        int bramki_zdobyte=0;
-        int bramki_stracone=0;
-        int liczba_meczy=0;
-        List<Match> match = matchDAO.getMatchs();
+    public List<Match> getMatchsforGroup(String group){
+        List<Match> matchToReturn = new ArrayList<>();
+        List<Match> matchs = matchDAO.getMatchs();
+        List<Team> teams = teamDAO.getTeamsByGroup(group);
 
+        for (final Match match : matchs) {
+            for (final Team team : teams) {
+                if(match.getIdteam1()==team.getIdteams() || match.getIdteam2()==team.getIdteams())
+                {
+                    if(!matchToReturn.contains(match)) {
+                        matchToReturn.add(match);
+                    }
 
-
-        return match;
+                }
+            }
+        }
+        return matchToReturn;
     }
 
 }

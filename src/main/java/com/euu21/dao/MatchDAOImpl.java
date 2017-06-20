@@ -45,7 +45,9 @@ public class MatchDAOImpl implements MatchDAO {
 
     @SuppressWarnings("unchecked")
     public List<Match> getMatchs() {
-        return getCurrentSession().createQuery("FROM Match").list();
+        List<Match> xxx = getCurrentSession().createQuery("FROM Match").list();
+        System.out.println("Rozmiar termianrza: "+xxx.size());
+        return xxx;
     }
 
 

@@ -22,6 +22,11 @@
 
     <title>Carousel Template for Bootstrap</title>
 
+    <link rel="stylesheet" src="https://npmcdn.com/react-bootstrap-table/dist/react-bootstrap-table-all.min.css">
+    </link>
+
+
+
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -29,6 +34,8 @@
     <link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
 </head>
 <body>
+
+
 
 <jsp:include page="module/navbar.jsp" />
 
@@ -54,24 +61,52 @@
     </div>
 
     <div class=".col-md-6" style="text-align: center!important; margin-left: 40px">
+        <h4>Tabela</h4>
         <table class="table table-striped">
             <thead> <tr> <th>#</th> <th>Drużyna</th> <th>MR</th> <th>G+</th> <th>G-</th> <th>PKT</th> </tr> </thead>
             <% int licznik=0; %>
             <tbody>
-            <c:forEach items="${teams}" var="teams">
+            <c:forEach items="${tables}" var="teams">
                 <% licznik = licznik +1; %>
                 <tr>
                     <th scope="row"><%=licznik%></th>
-                    <td>${teams.name}</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <th>G-</th>
-                    <th>PKT</th>
+                    <td>${teams.team_name}</td>
+                    <td>${teams.mr}</td>
+                    <td>${teams.g_plus}</td>
+                    <th>${teams.g_minus}</th>
+                    <th>${teams.pkt}</th>
                 </tr>
             </c:forEach>
             </tbody>
-
         </table>
+
+<div class="container">
+    <div class=".col-md-6">
+        <h4>Terminarz</h4>
+        <table class="table table-striped" style="text-align: center">
+            <tbody>
+                <c:forEach items="${matchs}" var="matchs">
+                    <tr>
+                        <td>
+                            <c:forEach items="${teams}" var="teams">
+                                <c:if test="${matchs.idteam1==teams.idteams}">${teams.name}</c:if>
+                            </c:forEach>
+                        </td>
+                        <th> ${matchs.idteam1_wynik}:${matchs.idteam2_wynik} </th>
+                        <td>
+                            <c:forEach items="${teams}" var="teams">
+                                <c:if test="${matchs.idteam2==teams.idteams}">${teams.name}</c:if>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
     </div>
 </div>
 

@@ -13,4 +13,5 @@ public interface MatchService {
     public Match getMatch(int id);
     public void deleteMatch(int id);
     public List<Match> getMatchs();
+    public List<Match> getMatchsforGroup(String group);
 }

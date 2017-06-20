@@ -1,6 +1,10 @@
 package com.euu21.controller;
 
+import com.euu21.dao.MatchDAO;
 import com.euu21.model.Team;
+import com.euu21.model.Match;
+import com.euu21.service.MatchService;
+import com.euu21.service.PlayerService;
 import com.euu21.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +21,14 @@ import java.util.List;
 @RequestMapping("/teams/")
 public class TeamController {
 
+
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    public MatchService matchService;
+    @Autowired
+    public PlayerService playerService;
 
     @RequestMapping("/")
     public String getTeams(Model model) {
@@ -35,14 +45,18 @@ public class TeamController {
         if (teams == null || teams.isEmpty()){ }
         model.addAttribute("teams", teams);
         model.addAttribute("tables", teamService.generateTabela(group));
-        return "teams";
+        model.addAttribute("matchs", matchService.getMatchsforGroup(group));
+
+        return "group";
     }
 
     @RequestMapping("/team/{name}")
     public String getTeamsByName(Model model, @PathVariable("name") String name) {
-        List<Team> teams = teamService.getTeamsByName(name);
-        teamService.listTeamToString(teams);
-        model.addAttribute("teams", teams);
-        return "group";
+        List<Team> team = teamService.getTeamsByName(name);
+
+        model.addAttribute("teams", team);
+        model.addAttribute("tables", teamService.generateTabela(team.get(0).getGroup()));
+        model.addAttribute("players", playerService.getPlayersforTeam(team.get(0).getIdteams()));
+        return "team";
     }
 }

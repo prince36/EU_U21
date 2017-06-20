@@ -24,14 +24,6 @@ public class Match {
         this.idmatch = idmatch;
     }
 
-    public Integer getIdteam1() {
-        return idteam1;
-    }
-
-    public void setIdteam1(Integer idteam1) {
-        this.idteam1 = idteam1;
-    }
-
     public Integer getIdteam1_wynik() {
         return idteam1_wynik;
     }
@@ -46,6 +38,15 @@ public class Match {
 
     public void setIdteam2_wynik(Integer idteam2_wynik) {
         this.idteam2_wynik = idteam2_wynik;
+    }
+
+
+    public Integer getIdteam1() {
+        return idteam1;
+    }
+
+    public void setIdteam1(Integer idteam1) {
+        this.idteam1 = idteam1;
     }
 
     public Integer getIdteam2() {

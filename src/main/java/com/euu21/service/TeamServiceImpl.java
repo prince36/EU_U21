@@ -34,6 +34,9 @@ public class TeamServiceImpl implements TeamService {
     public Team getTeam(int id) {
         return teamDAO.getTeam(id);
     }
+    public Team getTeam(String name) {
+        return teamDAO.getTeam(name);
+    }
 
     public void deleteTeam(int id) {
         teamDAO.deleteTeam(id);
@@ -96,15 +99,10 @@ public class TeamServiceImpl implements TeamService {
                     if(match.getIdteam1_wynik()>match.getIdteam2_wynik()){ pkt=pkt+0; }
                     if(match.getIdteam1_wynik()==match.getIdteam2_wynik()){ pkt=pkt+1; }
                 }
-
             }
             t1= new Tabela(name,mr,gp,gm,pkt);
             soc.add(t1);
         }
-
-
-
-
         return soc;
     }
 }
